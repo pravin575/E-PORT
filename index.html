@@ -5,12 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pravin Gidde – Full Stack Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#060708; --surface:#ffffff; --ink:#14213d; --muted:#55627c; --line:#d3dae6;
+  /* FIX 1: light background (was #060708, which made dark text invisible) */
+  --bg:#f3f5fb; --surface:#ffffff; --ink:#14213d; --muted:#55627c; --line:#d3dae6;
   --accent:#2f4bff; --accent-ink:#ffffff; --mark:#ffe27a;
   --display:'Bricolage Grotesque','Trebuchet MS',sans-serif; --body:'Figtree',system-ui,sans-serif;
+  color-scheme:light;
   box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){
@@ -18,35 +21,36 @@
 }
 :root[data-theme="dark"]{--bg:#0f1626;--surface:#18223a;--ink:#e8edf8;--muted:#9aa8c4;--line:#2a3654;--accent:#7f93ff;--accent-ink:#0f1626;--mark:#5a4b10;color-scheme:dark}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
-*{box-sizing:border-box}
+*,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body)}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
 .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
 header.nav{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0;gap:1rem;flex-wrap:wrap}
-.nav a{text-decoration:none;font-weight:500;margin-right:1.25rem;color:var(--muted)}
+.nav nav{display:flex;flex-wrap:wrap;gap:.25rem 1.25rem}
+.nav a{text-decoration:none;font-weight:500;color:var(--muted)} /* FIX: removed margin-right, gap handles spacing */
 .nav a:hover{color:var(--ink)}
-.nav .logo{font:800 1.25rem var(--display);color:var(--ink);margin:0}
+.nav .logo{font:800 1.25rem/1.2 var(--display);color:var(--ink);margin:0}
 .nav button{font:500 .9rem var(--body);background:none;border:1px solid var(--line);color:var(--ink);padding:.4rem .8rem;border-radius:999px;cursor:pointer}
 /* hero */
 .hero{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center;padding:3rem 0 4.5rem}
+.hero>*{min-width:0} /* FIX: stop grid children overflowing */
 h1{font:800 clamp(2.6rem,6vw,4.6rem)/1 var(--display);letter-spacing:-.03em;margin:0 0 1.25rem}
 .hl{background:linear-gradient(transparent 58%,var(--mark) 58%)}
 .hero p.lead{font-size:1.2rem;color:var(--muted);max-width:34rem;margin:0 0 1.75rem}
 .btns{display:flex;gap:.75rem;flex-wrap:wrap}
-.btn{display:inline-block;padding:.75rem 1.25rem;border-radius:10px;font-weight:600;text-decoration:none;border:2px solid var(--ink)}
+.btn{display:inline-block;padding:.75rem 1.25rem;border-radius:10px;font-weight:600;text-decoration:none;border:2px solid var(--ink);transition:transform .15s}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .btn:hover{transform:translateY(-2px)}
-.btn{transition:transform .15s}
 /* kanban */
 .board{background:var(--surface);border:1.5px solid var(--ink);border-radius:14px;padding:1rem;box-shadow:6px 6px 0 var(--ink)}
-.board h2{font:700 1rem var(--display);margin:0 0 .15rem}
+.board h2{font:700 1rem/1.3 var(--display);margin:0 0 .15rem}
 .board small{color:var(--muted);display:block;margin-bottom:.9rem;font-size:.85rem;line-height:1.4}
-.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
-.col{background:var(--bg);border-radius:8px;padding:.5rem;min-height:190px}
-.col h3{font:600 .85rem var(--body);margin:0 0 .5rem;display:flex;justify-content:space-between}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
+.col{background:var(--bg);border-radius:8px;padding:.5rem;min-height:190px;min-width:0}
+.col h3{font:600 .85rem var(--body);margin:0 0 .5rem;display:flex;justify-content:space-between;align-items:center;gap:.25rem}
 .col h3 span{background:var(--ink);color:var(--bg);border-radius:999px;padding:0 .5rem;font-size:.75rem;line-height:1.5}
-.chip{display:block;width:100%;text-align:left;font:500 .82rem var(--body);background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:.4rem .5rem;margin-bottom:.4rem;cursor:pointer}
+.chip{display:block;width:100%;text-align:left;font:500 .82rem/1.3 var(--body);background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:.4rem .5rem;margin-bottom:.4rem;cursor:pointer;overflow-wrap:anywhere} /* FIX: long labels wrap */
 .chip:hover{border-color:var(--accent)}
 .col:last-child .chip{background:var(--mark);border-color:transparent}
 .board .reset{font:500 .8rem var(--body);margin-top:.5rem;background:none;border:0;color:var(--accent);cursor:pointer;padding:0;text-decoration:underline}
@@ -54,34 +58,46 @@ h1{font:800 clamp(2.6rem,6vw,4.6rem)/1 var(--display);letter-spacing:-.03em;marg
 section{padding:3.5rem 0;border-top:1px solid var(--line)}
 h2.title{font:700 clamp(1.8rem,3.5vw,2.4rem)/1.1 var(--display);letter-spacing:-.02em;margin:0 0 2rem}
 .about{max-width:42rem;font-size:1.1rem}
-.timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--ink);margin-left:.4rem}
-.timeline li{position:relative;padding:0 0 2.25rem 1.75rem}
-.timeline li::before{content:"";position:absolute;left:-.55rem;top:.45rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
-.timeline h3{font:700 1.25rem var(--display);margin:0}
+.timeline{list-style:none;margin:0 0 0 .4rem;padding:0;border-left:2px solid var(--ink)}
+.timeline>li{position:relative;padding:0 0 2.25rem 1.75rem} /* FIX: child selectors so nested li are not affected */
+.timeline>li::before{content:"";position:absolute;left:-.55rem;top:.45rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.timeline h3{font:700 1.25rem/1.3 var(--display);margin:0}
 .when{color:var(--muted);font-size:.92rem;margin:.1rem 0 .6rem}
 .timeline ul{margin:0;padding-left:1.1rem;max-width:46rem}
-.timeline li li{padding:0;margin-bottom:.25rem;border:0}
-.timeline li li::before{display:none}
+.timeline ul li{margin-bottom:.25rem}
 .projects{display:grid;gap:1.25rem}
 .proj{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:1.5rem;display:grid;grid-template-columns:1fr 1.5fr;gap:1.5rem}
-.proj h3{font:700 1.4rem var(--display);margin:0 0 .6rem}
+.proj>*{min-width:0}
+.proj h3{font:700 1.4rem/1.2 var(--display);margin:0 0 .6rem}
 .tags{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 1rem;padding:0;list-style:none}
-.tags li{font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:.1rem .6rem;color:var(--muted)}
+.tags li{font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:.1rem .6rem;color:var(--muted);margin:0} /* FIX: reset margin inherited from .proj li */
 .proj a.link{font-weight:600;color:var(--accent)}
-.proj ul{margin:0;padding-left:1.1rem}
-.proj li{margin-bottom:.4rem}
-.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem 2rem}
-.skills h3{font:700 1rem var(--display);margin:0 0 .5rem}
+.proj ul:not(.tags){margin:0;padding-left:1.1rem}
+.proj ul:not(.tags) li{margin-bottom:.4rem}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:1.5rem 2rem}
+.skills h3{font:700 1rem/1.3 var(--display);margin:0 0 .5rem}
 .skills p{margin:0;color:var(--muted)}
-.edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
-.edu h3{font:700 1.1rem var(--display);margin:0}
+.edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:1.5rem}
+.edu h3{font:700 1.1rem/1.3 var(--display);margin:0}
 .edu p{margin:.15rem 0 0;color:var(--muted)}
 .contact{background:var(--ink);color:var(--bg);border-radius:18px;padding:2.5rem;margin:1rem 0 3rem}
 .contact h2{font:800 clamp(1.8rem,4vw,2.8rem)/1.1 var(--display);margin:0 0 1rem;letter-spacing:-.02em}
-.contact a{display:block;font-size:1.15rem;margin:.3rem 0;text-underline-offset:4px}
+.contact a{display:block;font-size:1.15rem;margin:.3rem 0;text-underline-offset:4px;overflow-wrap:anywhere}
+.contact a:focus-visible{outline-color:var(--bg)} /* FIX: focus ring visible on dark card */
 footer{text-align:center;color:var(--muted);font-size:.9rem;padding-bottom:2rem}
-@media (max-width:800px){.hero,.proj{grid-template-columns:1fr}.hero{padding-top:1.5rem}.cols{gap:.4rem}.col{min-height:150px}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+@media (max-width:800px){
+  .hero,.proj{grid-template-columns:1fr}
+  .hero{padding-top:1.5rem;gap:2rem}
+  .cols{gap:.4rem}
+  .col{min-height:150px}
+}
+@media (max-width:480px){
+  .cols{grid-template-columns:1fr} /* FIX: 3 tiny columns were cramped on phones */
+  .col{min-height:0}
+  .contact{padding:1.5rem}
+  .board{box-shadow:4px 4px 0 var(--ink)}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}.btn:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -267,8 +283,9 @@ document.getElementById('reset').onclick=()=>{state=START.map(()=>0);render();};
 render();
 document.getElementById('yr').textContent=new Date().getFullYear();
 const root=document.documentElement,tbtn=document.getElementById('theme');
-function sync(){const dark=root.dataset.theme==='dark'||(!root.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);tbtn.textContent=dark?'Light mode':'Dark mode';}
-tbtn.onclick=()=>{const dark=root.dataset.theme==='dark'||(!root.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);root.dataset.theme=dark?'light':'dark';sync();};
+function isDark(){return root.dataset.theme==='dark'||(!root.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);}
+function sync(){tbtn.textContent=isDark()?'Light mode':'Dark mode';}
+tbtn.onclick=()=>{root.dataset.theme=isDark()?'light':'dark';sync();};
 sync();
 </script>
 </body>
