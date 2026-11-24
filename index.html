@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pravin Gidde – Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef1f6; --surface:#ffffff; --ink:#14213d; --muted:#55627c; --line:#d3dae6;
+  --accent:#2f4bff; --accent-ink:#ffffff; --mark:#ffe27a;
+  --display:'Bricolage Grotesque','Trebuchet MS',sans-serif; --body:'Figtree',system-ui,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0f1626;--surface:#18223a;--ink:#e8edf8;--muted:#9aa8c4;--line:#2a3654;--accent:#7f93ff;--accent-ink:#0f1626;--mark:#5a4b10;color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#0f1626;--surface:#18223a;--ink:#e8edf8;--muted:#9aa8c4;--line:#2a3654;--accent:#7f93ff;--accent-ink:#0f1626;--mark:#5a4b10;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+header.nav{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0;gap:1rem;flex-wrap:wrap}
+.nav a{text-decoration:none;font-weight:500;margin-right:1.25rem;color:var(--muted)}
+.nav a:hover{color:var(--ink)}
+.nav .logo{font:800 1.25rem var(--display);color:var(--ink);margin:0}
+.nav button{font:500 .9rem var(--body);background:none;border:1px solid var(--line);color:var(--ink);padding:.4rem .8rem;border-radius:999px;cursor:pointer}
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center;padding:3rem 0 4.5rem}
+h1{font:800 clamp(2.6rem,6vw,4.6rem)/1 var(--display);letter-spacing:-.03em;margin:0 0 1.25rem}
+.hl{background:linear-gradient(transparent 58%,var(--mark) 58%)}
+.hero p.lead{font-size:1.2rem;color:var(--muted);max-width:34rem;margin:0 0 1.75rem}
+.btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.75rem 1.25rem;border-radius:10px;font-weight:600;text-decoration:none;border:2px solid var(--ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:hover{transform:translateY(-2px)}
+.btn{transition:transform .15s}
+/* kanban */
+.board{background:var(--surface);border:1.5px solid var(--ink);border-radius:14px;padding:1rem;box-shadow:6px 6px 0 var(--ink)}
+.board h2{font:700 1rem var(--display);margin:0 0 .15rem}
+.board small{color:var(--muted);display:block;margin-bottom:.9rem;font-size:.85rem;line-height:1.4}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.col{background:var(--bg);border-radius:8px;padding:.5rem;min-height:190px}
+.col h3{font:600 .85rem var(--body);margin:0 0 .5rem;display:flex;justify-content:space-between}
+.col h3 span{background:var(--ink);color:var(--bg);border-radius:999px;padding:0 .5rem;font-size:.75rem;line-height:1.5}
+.chip{display:block;width:100%;text-align:left;font:500 .82rem var(--body);background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:.4rem .5rem;margin-bottom:.4rem;cursor:pointer}
+.chip:hover{border-color:var(--accent)}
+.col:last-child .chip{background:var(--mark);border-color:transparent}
+.board .reset{font:500 .8rem var(--body);margin-top:.5rem;background:none;border:0;color:var(--accent);cursor:pointer;padding:0;text-decoration:underline}
+/* sections */
+section{padding:3.5rem 0;border-top:1px solid var(--line)}
+h2.title{font:700 clamp(1.8rem,3.5vw,2.4rem)/1.1 var(--display);letter-spacing:-.02em;margin:0 0 2rem}
+.about{max-width:42rem;font-size:1.1rem}
+.timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--ink);margin-left:.4rem}
+.timeline li{position:relative;padding:0 0 2.25rem 1.75rem}
+.timeline li::before{content:"";position:absolute;left:-.55rem;top:.45rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.timeline h3{font:700 1.25rem var(--display);margin:0}
+.when{color:var(--muted);font-size:.92rem;margin:.1rem 0 .6rem}
+.timeline ul{margin:0;padding-left:1.1rem;max-width:46rem}
+.timeline li li{padding:0;margin-bottom:.25rem;border:0}
+.timeline li li::before{display:none}
+.projects{display:grid;gap:1.25rem}
+.proj{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:1.5rem;display:grid;grid-template-columns:1fr 1.5fr;gap:1.5rem}
+.proj h3{font:700 1.4rem var(--display);margin:0 0 .6rem}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 1rem;padding:0;list-style:none}
+.tags li{font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:.1rem .6rem;color:var(--muted)}
+.proj a.link{font-weight:600;color:var(--accent)}
+.proj ul{margin:0;padding-left:1.1rem}
+.proj li{margin-bottom:.4rem}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem 2rem}
+.skills h3{font:700 1rem var(--display);margin:0 0 .5rem}
+.skills p{margin:0;color:var(--muted)}
+.edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.edu h3{font:700 1.1rem var(--display);margin:0}
+.edu p{margin:.15rem 0 0;color:var(--muted)}
+.contact{background:var(--ink);color:var(--bg);border-radius:18px;padding:2.5rem;margin:1rem 0 3rem}
+.contact h2{font:800 clamp(1.8rem,4vw,2.8rem)/1.1 var(--display);margin:0 0 1rem;letter-spacing:-.02em}
+.contact a{display:block;font-size:1.15rem;margin:.3rem 0;text-underline-offset:4px}
+footer{text-align:center;color:var(--muted);font-size:.9rem;padding-bottom:2rem}
+@media (max-width:800px){.hero,.proj{grid-template-columns:1fr}.hero{padding-top:1.5rem}.cols{gap:.4rem}.col{min-height:150px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="nav">
+    <p class="logo">Pravin Gidde</p>
+    <nav aria-label="Sections">
+      <a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+    </nav>
+    <button id="theme" type="button" aria-label="Toggle dark mode">Dark mode</button>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <h1>I build web apps that <span class="hl">teams use every day.</span></h1>
+        <p class="lead">I’m a full stack developer in Pune. I work with React, TypeScript, Node.js and SQL, and I’ve built CRM and HR tools with login, roles and real workflows.</p>
+        <div class="btns">
+          <a class="btn primary" href="#projects">See my projects</a>
+          <a class="btn" href="mailto:giddepravin797@gmail.com">Email me</a>
+        </div>
+      </div>
+      <div class="board" aria-label="Interactive status board">
+        <h2>Try the status flow from my CRM</h2>
+        <small>Click a card to move it to the next stage. This is how Lead, Interested and Converted work in my CRM project.</small>
+        <div class="cols" id="cols"></div>
+        <button class="reset" id="reset" type="button">Reset board</button>
+      </div>
+    </div>
+
+    <section id="about">
+      <h2 class="title">About me</h2>
+      <p class="about">I’m finishing my BBA in Computer Applications and studying for an MCA at Bharati Vidyapeeth. I’ve completed three internships and built projects on both the front end and the back end. I like clear code, tidy databases and interfaces that are easy to use.</p>
+    </section>
+
+    <section id="experience">
+      <h2 class="title">Experience</h2>
+      <ol class="timeline">
+        <li>
+          <h3>Full Stack Developer Intern, Mine HR Solutions</h3>
+          <p class="when">Nov 2026 – Present</p>
+          <ul>
+            <li>Build responsive web apps with HTML, CSS, JavaScript and React.js.</li>
+            <li>Create reusable UI components and support the Node.js back end.</li>
+            <li>Design MongoDB data storage and connect front end and back end with REST APIs.</li>
+            <li>Use Git and GitHub to collaborate and keep code clean.</li>
+          </ul>
+        </li>
+        <li>
+          <h3>B2B AIML Full Stack Developer Intern, WebMobi360</h3>
+          <p class="when">13 Oct 2025 – 13 Jan 2026</p>
+          <ul>
+            <li>Built a CRM application with React and TypeScript.</li>
+            <li>Wrote REST APIs and server logic in Node.js, and designed SQL schemas for users, roles and CRM data.</li>
+            <li>Added secure login with JWT tokens and role-based access control (RBAC).</li>
+            <li>Documented code and processes for the team.</li>
+          </ul>
+        </li>
+        <li>
+          <h3>Full Stack Developer Intern, XL Management Services</h3>
+          <p class="when">23 Jun 2025 – 23 Aug 2025</p>
+          <ul>
+            <li>Built responsive pages with HTML5, CSS3 and JavaScript, plus interactive features.</li>
+            <li>Deployed websites through the DirectAdmin panel and managed updates.</li>
+            <li>Practised debugging, troubleshooting and performance tuning.</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <section id="projects">
+      <h2 class="title">Projects</h2>
+      <div class="projects">
+        <article class="proj">
+          <div>
+            <h3>CRM Management System</h3>
+            <ul class="tags"><li>React</li><li>TypeScript</li><li>Node.js</li></ul>
+            <a class="link" href="https://github.com/Webmobi360-Development/CRM-Project.git" target="_blank" rel="noopener">View on GitHub</a>
+          </div>
+          <ul>
+            <li>Modules for GMB, College and Candidate management, handling 1000+ records with advanced search.</li>
+            <li>Bulk import from CSV and Excel with data validation, cutting manual entry time by 80%.</li>
+            <li>Task board with Table and Kanban views, drag and drop, and live updates.</li>
+            <li>Status tracking from Lead to Interested to Converted with live counts.</li>
+          </ul>
+        </article>
+        <article class="proj">
+          <div>
+            <h3>Attendance Management System</h3>
+            <ul class="tags"><li>Angular</li><li>Node.js</li><li>TypeScript</li><li>SQL</li></ul>
+            <a class="link" href="https://github.com/giddepravin7-cmd/AMS.git" target="_blank" rel="noopener">View on GitHub</a>
+          </div>
+          <ul>
+            <li>JWT login with role-based access for HR and Employee users.</li>
+            <li>Daily check-in and check-out, leave applications, shift change requests and attendance regularization.</li>
+            <li>HR tools for shift scheduling and leave approval.</li>
+            <li>Normalized SQL schema with optimized queries for attendance, shifts and leave.</li>
+          </ul>
+        </article>
+        <article class="proj">
+          <div>
+            <h3>Pet Store E-Com</h3>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Python</li><li>Django</li></ul>
+            <a class="link" href="https://github.com/pravin575/Online-Pet-Store.git" target="_blank" rel="noopener">View on GitHub</a>
+          </div>
+          <ul>
+            <li>Online shop for pet food with product listings, browsing and a shopping cart.</li>
+            <li>Responsive front end built with HTML, CSS and JavaScript.</li>
+            <li>Django back end with user login, product management and a secure checkout.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="title">Skills</h2>
+      <div class="skills">
+        <div><h3>Web</h3><p>HTML5, CSS, JavaScript, Bootstrap, Tailwind CSS, WordPress</p></div>
+        <div><h3>Frameworks and libraries</h3><p>React, Angular, Django, Flask, Laravel, Spring Boot</p></div>
+        <div><h3>Languages</h3><p>Python, Java, PHP</p></div>
+        <div><h3>Back end</h3><p>Node.js, REST APIs, JWT, RBAC</p></div>
+        <div><h3>Databases</h3><p>SQL, MongoDB</p></div>
+        <div><h3>Process and cloud</h3><p>SDLC, Agile, Scrum, Jira, Git, AWS</p></div>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2 class="title">Education</h2>
+      <div class="edu">
+        <div><h3>Master of Computer Applications</h3><p>Bharati Vidyapeeth Deemed to be University, IMED</p><p>Pursuing</p></div>
+        <div><h3>BBA (Computer Applications)</h3><p>Savitribai Phule Pune University</p><p>2022–2026, Grade B+</p></div>
+        <div><h3>Master in Full Stack Web Development with AWS</h3><p>Itvedant Education Pvt. Ltd., Pune</p><p>Course and certification</p></div>
+      </div>
+    </section>
+
+    <section id="contact" style="border:0;padding-bottom:0">
+      <div class="contact">
+        <h2>Let’s build something together.</h2>
+        <a href="mailto:giddepravin797@gmail.com">giddepravin797@gmail.com</a>
+        <a href="tel:+918010537525">+91 80105 37525</a>
+        <a href="https://www.linkedin.com/in/pravin-gidde" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/pravin575" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </section>
+  </main>
+  <footer>© <span id="yr"></span> Pravin Somnath Gidde · Pune, Maharashtra</footer>
+</div>
+
+<script>
+const STAGES=['Lead','Interested','Converted'];
+const START=['React + TypeScript','Node.js APIs','SQL schemas','JWT + RBAC','Angular','Django'];
+let state=START.map(()=>0);
+const cols=document.getElementById('cols');
+function render(){
+  cols.innerHTML='';
+  STAGES.forEach((s,i)=>{
+    const col=document.createElement('div');col.className='col';
+    const items=state.map((st,k)=>st===i?k:-1).filter(k=>k>=0);
+    const h=document.createElement('h3');h.innerHTML='<b>'+s+'</b><span>'+items.length+'</span>';
+    col.appendChild(h);
+    items.forEach(k=>{
+      const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=START[k];
+      b.setAttribute('aria-label',START[k]+', stage '+s+(i<2?'. Move to '+STAGES[i+1]:''));
+      b.onclick=()=>{state[k]=(state[k]+1)%3;render();};
+      col.appendChild(b);
+    });
+    cols.appendChild(col);
+  });
+}
+document.getElementById('reset').onclick=()=>{state=START.map(()=>0);render();};
+render();
+document.getElementById('yr').textContent=new Date().getFullYear();
+const root=document.documentElement,tbtn=document.getElementById('theme');
+function sync(){const dark=root.dataset.theme==='dark'||(!root.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);tbtn.textContent=dark?'Light mode':'Dark mode';}
+tbtn.onclick=()=>{const dark=root.dataset.theme==='dark'||(!root.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);root.dataset.theme=dark?'light':'dark';sync();};
+sync();
+</script>
+</body>
+</html>
